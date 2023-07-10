@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/todolist_app_db
+    username: root
+    password: bestuser
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jooq:
+    sql-dialect: org.hibernate.dialect.MySQL8Dialect

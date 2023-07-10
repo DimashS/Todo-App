@@ -1,0 +1,2 @@
+Todo list has SQL table with OneMany connection which uses Person for authentication in future
+and Items model to show realization of User's TodoList
