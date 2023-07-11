@@ -1,15 +1,10 @@
 package com.dimash.springboot.todoapplication.Controllers;
 
 import com.dimash.springboot.todoapplication.Model.Items;
-import com.dimash.springboot.todoapplication.Repository.PersonRepository;
 import com.dimash.springboot.todoapplication.Service.ItemsService;
-import org.apache.coyote.Response;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -17,7 +12,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/Items")
 public class AppController {
     @Autowired
@@ -60,7 +55,7 @@ public class AppController {
 
     @GetMapping("/incompletedTasks")
     public ResponseEntity<List<Items>> getAllIncompletedItems() {
-        return ResponseEntity.ok(itemsService.getAllNonCompletedItems());
+        return ResponseEntity.ok(itemsService.getAllCompletedFalseItems());
     }
 
     @GetMapping("/createdDate")
