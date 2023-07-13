@@ -1,0 +1,12 @@
+Todo Lists
+1. Model: Person has relation OneToMany to TodoList, thus it has OneToMany to Items
+          Items has ManyToOne to TodoList
+2.
+
+
+
+
+1. Create opportunity to make a List of items and put our items in this list
+2. Then get list of items
+3. create 3 classes where Person has many Todo Lists, thus Todo Lists has many items
+4. Create initBinder which gets random date and convert it

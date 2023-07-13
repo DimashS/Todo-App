@@ -7,7 +7,6 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -33,7 +32,7 @@ public class Person {
     @Column(name = "roles")
     private String roles;
     @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
-    private List<Items> itemsList = new ArrayList<>();
+    private List<TodoList> todoLists = new ArrayList<>();
 
 
 }

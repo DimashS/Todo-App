@@ -8,13 +8,16 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
-@Table(name = "todo-list-items")
+@Table(name = "items")
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Items {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,19 +32,12 @@ public class Items {
 
     @Column(name = "created_date")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
 
     @Column(name = "modified_date")
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private LocalDateTime modifiedDate;
+    @DateTimeFormat(pattern = "HH.mm.ss")
+    private LocalTime modifiedDate;
 
-    @Column(name = "role")
-    private String role;
-
-    @Column(name = "person_id")
-    private int personId;
-
-    @ManyToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private TodoList todoList;
 }
