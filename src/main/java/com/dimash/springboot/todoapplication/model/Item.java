@@ -7,36 +7,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
 @Setter
-@Table(name = "items")
+@Table(name = "item")
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Items {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "completed")
     private int completed;
 
-    @Column(name = "created_date")
     @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private LocalDate createdDate;
+    private LocalDate date;
 
-    @Column(name = "modified_date")
     @DateTimeFormat(pattern = "HH.mm.ss")
-    private LocalTime modifiedDate;
+    private LocalTime time;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private TodoList todoList;

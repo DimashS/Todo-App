@@ -9,3 +9,5 @@ spring:
     show-sql: true
   jooq:
     sql-dialect: org.hibernate.dialect.MySQL8Dialect
+  cassandra:
+    port: 8080

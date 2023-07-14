@@ -1,18 +1,14 @@
 package com.dimash.springboot.todoapplication.Controllers;
 
-import com.dimash.springboot.todoapplication.Model.Items;
-import com.dimash.springboot.todoapplication.Model.TodoList;
+import com.dimash.springboot.todoapplication.Model.Item;
 import com.dimash.springboot.todoapplication.Service.ItemsService;
-import com.dimash.springboot.todoapplication.Service.TodoListService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 
@@ -24,29 +20,28 @@ public class AppControllerForItems {
     private ItemsService itemsService;
 
     @GetMapping
-    public ResponseEntity<List<Items>> getAllItems(@RequestParam(value = "todoListId") Long todoListId,
-                                                   @Valid @RequestParam(value = "date", required = false) LocalDate localDate) {
+    public ResponseEntity<List<Item>> getItem(@RequestParam(value = "todoListId") Long todoListId,
+                                              @RequestParam(value = "date", required = false) LocalDate localDate) {
         // if we have required = false, would have we get troubles with services methods
-        List<Items> itemsList = itemsService.getItemsFromTodoList(todoListId, localDate);
+        List<Item> itemsList = itemsService.getItem(todoListId, localDate);
         return ResponseEntity.ok(itemsList);
     }
 
     @PostMapping
-    public ResponseEntity<Items> createItem(@RequestParam(value = "todoListId") Long todoListId, @RequestBody Items items) {
-        Items createdItem = itemsService.createItemForTodo(todoListId, items);
+    public ResponseEntity<Item> createItem(@RequestParam(value = "todoListId") Long todoListId, @RequestBody Item items) {
+        Item createdItem = itemsService.createItem(todoListId, items);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdItem);
-
     }
 
     @PutMapping("/{itemId}")
-    public ResponseEntity<Items> updateItem(@PathVariable Long itemId, @RequestBody Items updatedItem) {
-        Items updatedItems = itemsService.updateItemForTodoList(itemId, updatedItem);
+    public ResponseEntity<Item> updateItem(@PathVariable Long itemId, @RequestBody Item updatedItem) {
+        Item updatedItems = itemsService.update(itemId, updatedItem);
         return ResponseEntity.ok(updatedItems);
     }
 
     @DeleteMapping("/{itemId}")
     public ResponseEntity<Void> deleteItem(@PathVariable Long itemId) {
-        boolean deleted = itemsService.deleteItems(itemId);
+        boolean deleted = itemsService.delete(itemId);
         if (deleted) {
             return ResponseEntity.noContent().build();
         } else {
@@ -54,3 +49,4 @@ public class AppControllerForItems {
         }
     }
 }
+
