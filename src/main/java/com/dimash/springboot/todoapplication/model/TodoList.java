@@ -17,15 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "todo_list")
 @Entity
-public class TodoList {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class TodoList extends BaseEntity {
 
     private String name;
-
-    @DateTimeFormat(pattern = "dd:mm:yyyy")
-    private LocalDate creationDate;
     // here we have relation ManyToOne
 
     @ManyToOne(fetch = FetchType.EAGER)

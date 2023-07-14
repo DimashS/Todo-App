@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class AppControllerTodoList {
     @GetMapping("/date")
     public ResponseEntity<List<TodoList>> getList(@RequestParam(value = "person_id") Long personId,
                                                   @Valid @RequestParam(value = "creation_date", required = false)
-                                                  LocalDate date) {
+                                                  LocalDateTime date) {
         if (date != null) {
             List<TodoList> todoLists = todoListService.getList(personId, date);
             return ResponseEntity.ok(todoLists);

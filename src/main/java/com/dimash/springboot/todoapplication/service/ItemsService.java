@@ -4,23 +4,19 @@ import com.dimash.springboot.todoapplication.model.Item;
 import com.dimash.springboot.todoapplication.model.TodoList;
 import com.dimash.springboot.todoapplication.repository.ItemsRepository;
 import com.dimash.springboot.todoapplication.repository.TodoListRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ItemsService {
-    @Autowired
     private final ItemsRepository itemsRepository;
-    @Autowired
     private final TodoListRepository todoListRepository;
-
-    public ItemsService(ItemsRepository itemsRepository, TodoListRepository todoListRepository) {
-        this.itemsRepository = itemsRepository;
-        this.todoListRepository = todoListRepository;
-    }
 
     public Item createItem(Long todoListId, Item items) {
         TodoList todoList = todoListRepository.findById(todoListId)
@@ -52,6 +48,7 @@ public class ItemsService {
         items1.setCompleted(updatedItems.getCompleted());
         items1.setDate(updatedItems.getDate());
         items1.setTime(updatedItems.getTime());
+        items1.setLastModifiedDate(LocalDateTime.now());
         return itemsRepository.save(items1);
     }
 
