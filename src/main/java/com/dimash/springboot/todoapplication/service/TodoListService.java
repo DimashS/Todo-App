@@ -1,9 +1,9 @@
-package com.dimash.springboot.todoapplication.Service;
+package com.dimash.springboot.todoapplication.service;
 
-import com.dimash.springboot.todoapplication.Model.Person;
-import com.dimash.springboot.todoapplication.Model.TodoList;
-import com.dimash.springboot.todoapplication.Repository.PersonRepository;
-import com.dimash.springboot.todoapplication.Repository.TodoListRepository;
+import com.dimash.springboot.todoapplication.model.Person;
+import com.dimash.springboot.todoapplication.model.TodoList;
+import com.dimash.springboot.todoapplication.repository.PersonRepository;
+import com.dimash.springboot.todoapplication.repository.TodoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +32,12 @@ public class TodoListService {
         return todoListRepository.save(todoList);
     }
 
+    public List<TodoList> getList(Long personId, String name) {
+        Person person1 = personRepository.findById(personId)
+                .orElseThrow(() -> new RuntimeException("Person not found"));
+        return todoListRepository.findTodoListByIdAndNameLike(person1.getId(), name);
+    }
+
     public List<TodoList> getList(Long personId) {
         return todoListRepository.findByPersonId(personId);
     }
@@ -52,7 +58,7 @@ public class TodoListService {
     public void deleteList(Long id) {
         TodoList todoList = todoListRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("There is wrong id"));
-        todoListRepository.deleteTodoListById(todoList.getId());
+        todoListRepository.deleteById(todoList.getId());
     }
 
 

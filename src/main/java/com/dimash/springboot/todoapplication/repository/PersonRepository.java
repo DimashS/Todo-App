@@ -1,6 +1,6 @@
-package com.dimash.springboot.todoapplication.Repository;
+package com.dimash.springboot.todoapplication.repository;
 
-import com.dimash.springboot.todoapplication.Model.Person;
+import com.dimash.springboot.todoapplication.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

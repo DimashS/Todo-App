@@ -1,4 +1,4 @@
-package com.dimash.springboot.todoapplication.Model;
+package com.dimash.springboot.todoapplication.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

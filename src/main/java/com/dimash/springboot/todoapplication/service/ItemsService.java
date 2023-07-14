@@ -1,9 +1,9 @@
-package com.dimash.springboot.todoapplication.Service;
+package com.dimash.springboot.todoapplication.service;
 
-import com.dimash.springboot.todoapplication.Model.Item;
-import com.dimash.springboot.todoapplication.Model.TodoList;
-import com.dimash.springboot.todoapplication.Repository.ItemsRepository;
-import com.dimash.springboot.todoapplication.Repository.TodoListRepository;
+import com.dimash.springboot.todoapplication.model.Item;
+import com.dimash.springboot.todoapplication.model.TodoList;
+import com.dimash.springboot.todoapplication.repository.ItemsRepository;
+import com.dimash.springboot.todoapplication.repository.TodoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +37,12 @@ public class ItemsService {
             return itemsRepository.getItemsByTodoListAndDate(todoList, date);
         }
         return itemsRepository.findItemsByTodoListId(todoListId);
+    }
+
+    public List<Item> getByDescription(Long todoListId, String description) {
+        TodoList todoList = todoListRepository.findById(todoListId)
+                .orElseThrow(() -> new RuntimeException("Incorrect id" + todoListId));
+        return itemsRepository.findItemsByIdAndDescriptionLike(todoList.getId(), description);
     }
 
     public Item update(Long itemId, Item updatedItems) {

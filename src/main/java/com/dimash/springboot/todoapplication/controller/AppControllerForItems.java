@@ -1,9 +1,7 @@
-package com.dimash.springboot.todoapplication.Controllers;
+package com.dimash.springboot.todoapplication.controller;
 
-import com.dimash.springboot.todoapplication.Model.Item;
-import com.dimash.springboot.todoapplication.Service.ItemsService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dimash.springboot.todoapplication.model.Item;
+import com.dimash.springboot.todoapplication.service.ItemsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +14,25 @@ import java.util.List;
 @RequestMapping("/item")
 public class AppControllerForItems {
 
-    @Autowired
-    private ItemsService itemsService;
+    private final ItemsService itemsService;
 
-    @GetMapping
+    public AppControllerForItems(ItemsService itemsService) {
+        this.itemsService = itemsService;
+    }
+
+    @GetMapping("/date")
     public ResponseEntity<List<Item>> getItem(@RequestParam(value = "todoListId") Long todoListId,
                                               @RequestParam(value = "date", required = false) LocalDate localDate) {
         // if we have required = false, would have we get troubles with services methods
         List<Item> itemsList = itemsService.getItem(todoListId, localDate);
         return ResponseEntity.ok(itemsList);
+    }
+
+    @GetMapping("/description")
+    public ResponseEntity<List<Item>> getItem(@RequestParam(value = "todoListId") Long todoListId,
+                                              @RequestParam(value = "description") String description) {
+        List<Item> item = itemsService.getByDescription(todoListId, description);
+        return ResponseEntity.ok(item);
     }
 
     @PostMapping

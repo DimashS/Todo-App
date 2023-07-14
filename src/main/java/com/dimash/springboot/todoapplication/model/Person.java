@@ -1,6 +1,5 @@
-package com.dimash.springboot.todoapplication.Model;
+package com.dimash.springboot.todoapplication.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
