@@ -23,10 +23,8 @@ public class Item extends BaseEntity {
 
     private int completed;
 
-    @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate date;
 
-    @JsonFormat(pattern = "HH.mm.ss")
     private LocalTime time;
 
     @ManyToOne(fetch = FetchType.LAZY)

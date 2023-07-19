@@ -22,6 +22,7 @@ public class TodoList extends BaseEntity {
     // here we have relation ManyToOne
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Person person;
     // here we have relation OneToMany => One List has a lot of items
 

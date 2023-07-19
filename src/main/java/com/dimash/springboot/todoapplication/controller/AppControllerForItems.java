@@ -27,9 +27,10 @@ public class AppControllerForItems {
 
     @GetMapping("/date")
     public ResponseEntity<List<ItemDTO>> getItem(@RequestParam(value = "todoListId") Long todoListId,
-                                                 @RequestParam(value = "creation_date", required = false) LocalDate date) {
+                                                 @RequestParam(value = "required_date", required = false)
+                                                 LocalDate requiredDate) {
         // if we have required = false, would have we get troubles with services methods
-        return ResponseEntity.ok(itemService.getItem(todoListId, date).stream()
+        return ResponseEntity.ok(itemService.getItem(todoListId, requiredDate).stream()
                 .map(this::convertToDTO).toList());
     }
 
@@ -48,7 +49,7 @@ public class AppControllerForItems {
 
     @PutMapping("/{itemId}")
     public ResponseEntity<ItemDTO> updateItem(@PathVariable Long itemId, @RequestBody ItemDTO updatedItem) {
-        return ResponseEntity.ok(convertToDTO(itemService.update(itemId,convertToEntity(updatedItem))));g
+        return ResponseEntity.ok(convertToDTO(itemService.update(itemId,convertToEntity(updatedItem))));
     }
 
     @DeleteMapping("/{itemId}")
