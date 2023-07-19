@@ -5,7 +5,6 @@ import com.dimash.springboot.todoapplication.model.TodoList;
 import com.dimash.springboot.todoapplication.repository.ItemsRepository;
 import com.dimash.springboot.todoapplication.repository.TodoListRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -35,7 +34,7 @@ public class ItemsService {
         return itemsRepository.findItemsByTodoListId(todoListId);
     }
 
-    public List<Item> getByDescription(Long todoListId, String description) {
+    public List<Item> getItem(Long todoListId, String description) {
         TodoList todoList = todoListRepository.findById(todoListId)
                 .orElseThrow(() -> new RuntimeException("Incorrect id" + todoListId));
         return itemsRepository.findItemsByIdAndDescriptionLike(todoList.getId(), description);

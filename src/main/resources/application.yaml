@@ -11,3 +11,8 @@ spring:
     sql-dialect: org.hibernate.dialect.MySQL8Dialect
   cassandra:
     port: 8080
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    operations-sorter: method

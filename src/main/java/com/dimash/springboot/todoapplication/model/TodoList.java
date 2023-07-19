@@ -1,13 +1,12 @@
 package com.dimash.springboot.todoapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +25,8 @@ public class TodoList extends BaseEntity {
     private Person person;
     // here we have relation OneToMany => One List has a lot of items
 
+
     @OneToMany(mappedBy = "todoList", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Item> itemList = new ArrayList<>();
 }
