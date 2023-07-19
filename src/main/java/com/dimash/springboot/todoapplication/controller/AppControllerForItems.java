@@ -43,8 +43,8 @@ public class AppControllerForItems {
 
     @PostMapping
     public ResponseEntity<ItemDTO> createItem(@RequestParam(value = "todoListId") Long todoListId, @RequestBody ItemDTO itemDTO) {
-        ItemDTO newItem = convertToDTO(itemService.createItem(todoListId, convertToEntity(itemDTO)));
-        return ResponseEntity.status(HttpStatus.CREATED).body(newItem);
+        ItemDTO newItemDTO = convertToDTO(itemService.createItem(todoListId, convertToEntity(itemDTO)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(newItemDTO);
     }
 
     @PutMapping("/{itemId}")

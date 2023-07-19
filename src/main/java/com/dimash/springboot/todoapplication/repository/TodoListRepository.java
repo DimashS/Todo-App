@@ -11,7 +11,7 @@ public interface TodoListRepository extends JpaRepository<TodoList, Long> {
 
     List<TodoList> findByPersonId(Long id);
 
-    List<TodoList> findByIdAndCreatedDate(Long id, LocalDateTime creationDate);
+    List<TodoList> findByIdAndCreatedDate(Long id, LocalDateTime createdDate);
 
     List<TodoList> findTodoListByIdAndNameLike(Long id, String name);
 

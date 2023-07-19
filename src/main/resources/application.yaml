@@ -16,3 +16,6 @@ springdoc:
     path: /api-docs
   swagger-ui:
     operations-sorter: method
+server:
+  error:
+    include-message: always

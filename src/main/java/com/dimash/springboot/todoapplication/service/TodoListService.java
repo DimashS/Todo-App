@@ -7,6 +7,7 @@ import com.dimash.springboot.todoapplication.repository.TodoListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class TodoListService {
     private final PersonRepository personRepository;
 
     public TodoList createList(Long personId, TodoList todoList) {
-        Person person1 = personRepository.findById(personId).orElseThrow(() -> new RuntimeException("Person not found"));
+        Person person1 = personRepository.findById(personId).orElseThrow(()
+                -> new RuntimeException("Person not found"));
         todoList.setPerson(person1);
         todoList.setCreatedDate(LocalDateTime.now());
         todoList.setLastModifiedDate(LocalDateTime.now());
@@ -28,7 +30,8 @@ public class TodoListService {
     }
 
     public List<TodoList> getList(Long personId, String name) {
-        Person person1 = personRepository.findById(personId).orElseThrow(() -> new RuntimeException("Person not found"));
+        Person person1 = personRepository.findById(personId).orElseThrow(()
+                -> new RuntimeException("Person not found"));
         return todoListRepository.findTodoListByIdAndNameLike(person1.getId(), name);
     }
 
@@ -41,7 +44,8 @@ public class TodoListService {
     }
 
     public TodoList updateList(Long todoListId, TodoList updatedTodoList) {
-        TodoList todoList1 = todoListRepository.findById(todoListId).orElseThrow(() -> new RuntimeException("There is wrong id"));
+        TodoList todoList1 = todoListRepository.findById(todoListId).orElseThrow(()
+                -> new RuntimeException("There is wrong id"));
         todoList1.setName(updatedTodoList.getName());
         todoList1.setLastModifiedDate(LocalDateTime.now());
         return todoListRepository.save(todoList1);
