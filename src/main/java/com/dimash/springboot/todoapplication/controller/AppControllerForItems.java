@@ -48,7 +48,7 @@ public class AppControllerForItems {
 
     @PutMapping("/{itemId}")
     public ResponseEntity<ItemDTO> updateItem(@PathVariable Long itemId, @RequestBody ItemDTO updatedItem) {
-        return ResponseEntity.ok(convertToDTO(itemService.update(itemId,convertToEntity(updatedItem))));t
+        return ResponseEntity.ok(convertToDTO(itemService.update(itemId,convertToEntity(updatedItem))));g
     }
 
     @DeleteMapping("/{itemId}")
