@@ -7,7 +7,6 @@ import com.dimash.springboot.todoapplication.repository.TodoListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class TodoListService {
         Person person1 = personRepository.findById(personId).orElseThrow(() -> new RuntimeException("Person not found"));
         todoList.setPerson(person1);
         todoList.setCreatedDate(LocalDateTime.now());
+        todoList.setLastModifiedDate(LocalDateTime.now());
         return todoListRepository.save(todoList);
     }
 

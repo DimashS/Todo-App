@@ -1,0 +1,14 @@
+package com.dimash.springboot.todoapplication.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class TodoListDTO {
+    private String name;
+}

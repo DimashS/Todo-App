@@ -1,5 +1,6 @@
 package com.dimash.springboot.todoapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,10 +23,10 @@ public class Item extends BaseEntity {
 
     private int completed;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate date;
 
-    @DateTimeFormat(pattern = "HH.mm.ss")
+    @JsonFormat(pattern = "HH.mm.ss")
     private LocalTime time;
 
     @ManyToOne(fetch = FetchType.LAZY)

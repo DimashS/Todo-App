@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface ItemsRepository extends JpaRepository<Item, Long> {
+public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> getItemsByTodoListAndDate(TodoList todoList, LocalDate date);
 
     List<Item> findItemsByTodoListId(Long id);

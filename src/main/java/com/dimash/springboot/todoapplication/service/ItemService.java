@@ -2,7 +2,7 @@ package com.dimash.springboot.todoapplication.service;
 
 import com.dimash.springboot.todoapplication.model.Item;
 import com.dimash.springboot.todoapplication.model.TodoList;
-import com.dimash.springboot.todoapplication.repository.ItemsRepository;
+import com.dimash.springboot.todoapplication.repository.ItemRepository;
 import com.dimash.springboot.todoapplication.repository.TodoListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ItemsService {
-    private final ItemsRepository itemsRepository;
+public class ItemService {
+    private final ItemRepository itemsRepository;
     private final TodoListRepository todoListRepository;
 
     public Item createItem(Long todoListId, Item items) {
