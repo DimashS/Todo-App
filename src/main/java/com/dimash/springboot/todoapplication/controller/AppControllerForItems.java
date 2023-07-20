@@ -2,7 +2,7 @@ package com.dimash.springboot.todoapplication.controller;
 
 import com.dimash.springboot.todoapplication.dto.ItemDTO;
 import com.dimash.springboot.todoapplication.model.Item;
-import com.dimash.springboot.todoapplication.service.ItemService;
+import com.dimash.springboot.todoapplication.service.serviceImpl.ItemServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +16,11 @@ import java.util.List;
 @RequestMapping("/item")
 public class AppControllerForItems {
 
-    private final ItemService itemService;
+    private final ItemServiceImpl itemService;
 
     private final ModelMapper modelMapper;
 
-    public AppControllerForItems(ItemService itemsService, ModelMapper modelMapper) {
+    public AppControllerForItems(ItemServiceImpl itemsService, ModelMapper modelMapper) {
         this.itemService = itemsService;
         this.modelMapper = modelMapper;
     }
@@ -30,20 +30,20 @@ public class AppControllerForItems {
                                                  @RequestParam(value = "required_date", required = false)
                                                  LocalDate requiredDate) {
         // if we have required = false, would have we get troubles with services methods
-        return ResponseEntity.ok(itemService.getItem(todoListId, requiredDate).stream()
+        return ResponseEntity.ok(itemService.get(todoListId, requiredDate).stream()
                 .map(this::convertToDTO).toList());
     }
 
     @GetMapping("/description")
     public ResponseEntity<List<ItemDTO>> getItem(@RequestParam(value = "todoListId") Long todoListId,
                                                  @RequestParam(value = "description") String description) {
-        return ResponseEntity.ok(itemService.getItem(todoListId, description).stream()
+        return ResponseEntity.ok(itemService.get(todoListId, description).stream()
                 .map(this::convertToDTO).toList());
     }
 
     @PostMapping
     public ResponseEntity<ItemDTO> createItem(@RequestParam(value = "todoListId") Long todoListId, @RequestBody ItemDTO itemDTO) {
-        ItemDTO newItemDTO = convertToDTO(itemService.createItem(todoListId, convertToEntity(itemDTO)));
+        ItemDTO newItemDTO = convertToDTO(itemService.create(todoListId, convertToEntity(itemDTO)));
         return ResponseEntity.status(HttpStatus.CREATED).body(newItemDTO);
     }
 

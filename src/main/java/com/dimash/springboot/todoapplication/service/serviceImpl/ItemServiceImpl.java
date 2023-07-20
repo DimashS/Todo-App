@@ -1,11 +1,11 @@
-package com.dimash.springboot.todoapplication.service;
+package com.dimash.springboot.todoapplication.service.serviceImpl;
 
 import com.dimash.springboot.todoapplication.model.Item;
 import com.dimash.springboot.todoapplication.model.TodoList;
 import com.dimash.springboot.todoapplication.repository.ItemRepository;
 import com.dimash.springboot.todoapplication.repository.TodoListRepository;
+import com.dimash.springboot.todoapplication.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,11 +14,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ItemServiceImpl {
+public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemsRepository;
     private final TodoListRepository todoListRepository;
 
-    public Item createItem(Long todoListId, Item item) {
+    @Override
+    public Item create(Long todoListId, Item item) {
         TodoList todoList = todoListRepository.findById(todoListId)
                 .orElseThrow(() -> new RuntimeException("Not found todoList " + todoListId));
         item.setTodoList(todoList);
@@ -27,7 +28,8 @@ public class ItemServiceImpl {
         return itemsRepository.save(item);
     }
 
-    public List<Item> getItem(Long todoListId, LocalDate date) {
+    @Override
+    public List<Item> get(Long todoListId, LocalDate date) {
         TodoList todoList = todoListRepository.findById(todoListId)
                 .orElseThrow(() -> new RuntimeException("Incorrect id " + todoListId));
         // if null do in try, if not get all
@@ -37,12 +39,14 @@ public class ItemServiceImpl {
         return itemsRepository.findItemsByTodoListId(todoListId);
     }
 
-    public List<Item> getItem(Long todoListId, String description) {
+    @Override
+    public List<Item> get(Long todoListId, String description) {
         TodoList todoList = todoListRepository.findById(todoListId)
                 .orElseThrow(() -> new RuntimeException("Incorrect id " + todoListId));
         return itemsRepository.findItemsByIdAndDescriptionLike(todoList.getId(), description);
     }
 
+    @Override
     public Item update(Long itemId, Item updatedItem) {
         Item items1 = itemsRepository.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("Not found todoList " + itemId));
@@ -54,6 +58,7 @@ public class ItemServiceImpl {
         return itemsRepository.save(items1);
     }
 
+    @Override
     public boolean delete(Long itemId) {
         if (itemsRepository.existsById(itemId)) {
             itemsRepository.deleteById(itemId);
@@ -63,4 +68,3 @@ public class ItemServiceImpl {
         }
     }
 }
-// приходит запрос вид
