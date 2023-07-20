@@ -1,4 +1,4 @@
-package com.dimash.springboot.todoapplication.service;
+package com.dimash.springboot.todoapplication.service.serviceImpl;
 
 import com.dimash.springboot.todoapplication.model.Person;
 import com.dimash.springboot.todoapplication.model.TodoList;

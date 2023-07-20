@@ -5,6 +5,7 @@ import com.dimash.springboot.todoapplication.model.TodoList;
 import com.dimash.springboot.todoapplication.repository.ItemRepository;
 import com.dimash.springboot.todoapplication.repository.TodoListRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,15 +14,17 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ItemService {
+public class ItemServiceImpl {
     private final ItemRepository itemsRepository;
     private final TodoListRepository todoListRepository;
 
-    public Item createItem(Long todoListId, Item items) {
+    public Item createItem(Long todoListId, Item item) {
         TodoList todoList = todoListRepository.findById(todoListId)
                 .orElseThrow(() -> new RuntimeException("Not found todoList " + todoListId));
-        items.setTodoList(todoList);
-        return itemsRepository.save(items);
+        item.setTodoList(todoList);
+        item.setCreatedDate(LocalDateTime.now());
+        item.setLastModifiedDate(LocalDateTime.now());
+        return itemsRepository.save(item);
     }
 
     public List<Item> getItem(Long todoListId, LocalDate date) {
@@ -40,20 +43,20 @@ public class ItemService {
         return itemsRepository.findItemsByIdAndDescriptionLike(todoList.getId(), description);
     }
 
-    public Item update(Long itemId, Item updatedItems) {
+    public Item update(Long itemId, Item updatedItem) {
         Item items1 = itemsRepository.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("Not found todoList " + itemId));
-        items1.setDescription(updatedItems.getDescription());
-        items1.setCompleted(updatedItems.getCompleted());
-        items1.setDate(updatedItems.getDate());
-        items1.setTime(updatedItems.getTime());
+        items1.setDescription(updatedItem.getDescription());
+        items1.setCompleted(updatedItem.getCompleted());
+        items1.setDate(updatedItem.getDate());
+        items1.setTime(updatedItem.getTime());
         items1.setLastModifiedDate(LocalDateTime.now());
         return itemsRepository.save(items1);
     }
 
-    public boolean delete(Long itemsId) {
-        if (itemsRepository.existsById(itemsId)) {
-            itemsRepository.deleteById(itemsId);
+    public boolean delete(Long itemId) {
+        if (itemsRepository.existsById(itemId)) {
+            itemsRepository.deleteById(itemId);
             return true;
         } else {
             return false;
