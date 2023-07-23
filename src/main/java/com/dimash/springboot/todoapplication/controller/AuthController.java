@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
     private final RegistrationServiceImpl registrationService;
-
     private final AuthenticationManager authenticationManager;
     private final ModelMapper modelMapper;
 
@@ -33,13 +32,12 @@ public class AuthController {
         this.modelMapper = modelMapper;
     }
 
-
     @PostMapping("/registration")
     public ResponseEntity<String> registerUser(@RequestBody @Valid PersonDTO personDTO) {
         try {
             Person person = convertToPerson(personDTO);
             registrationService.registerUser(person);
-            return ResponseEntity.ok("Регистрация прошла успешно!");
+            return ResponseEntity.ok("Successfully!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("something wrong!");
         }
@@ -52,7 +50,7 @@ public class AuthController {
                     (new UsernamePasswordAuthenticationToken(authenticationDTO.getUsername(),
                             authenticationDTO.getUsername(), null));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return ResponseEntity.ok("Аутентификация прошла успешно");
+            return ResponseEntity.ok("Successful authentication");
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Something wrong!");
         }

@@ -16,17 +16,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/item")
 @PreAuthorize("isAuthenticated()")
-public class AppControllerForItems {
+public class AppControllerForItem {
 
     private final ItemServiceImpl itemService;
 
     private final ModelMapper modelMapper;
 
-    public AppControllerForItems(ItemServiceImpl itemsService, ModelMapper modelMapper) {
+    public AppControllerForItem(ItemServiceImpl itemsService, ModelMapper modelMapper) {
         this.itemService = itemsService;
         this.modelMapper = modelMapper;
     }
 
+    @PreAuthorize("@itemAccessServiceImpl.canRead(#todoListId)")
     @GetMapping("/date")
     public ResponseEntity<List<ItemDTO>> getItem(@RequestParam(value = "todoListId") Long todoListId,
                                                  @RequestParam(value = "required_date", required = false)
@@ -36,24 +37,28 @@ public class AppControllerForItems {
                 .map(this::convertToDTO).toList());
     }
 
+    @PreAuthorize("@itemAccessServiceImpl.canRead(#todoListId)")
     @GetMapping("/description")
     public ResponseEntity<List<ItemDTO>> getItem(@RequestParam(value = "todoListId") Long todoListId,
                                                  @RequestParam(value = "description") String description) {
-         return ResponseEntity.ok(itemService.get(todoListId, description).stream()
+        return ResponseEntity.ok(itemService.get(todoListId, description).stream()
                 .map(this::convertToDTO).toList());
     }
 
+    @PreAuthorize("@itemAccessServiceImpl.canCreate(#todoListId)")
     @PostMapping
     public ResponseEntity<ItemDTO> createItem(@RequestParam(value = "todoListId") Long todoListId, @RequestBody ItemDTO itemDTO) {
         ItemDTO newItemDTO = convertToDTO(itemService.create(todoListId, convertToEntity(itemDTO)));
         return ResponseEntity.status(HttpStatus.CREATED).body(newItemDTO);
     }
 
+    @PreAuthorize("@itemAccessServiceImpl.canUpdate(#itemId)")
     @PutMapping("/{itemId}")
     public ResponseEntity<ItemDTO> updateItem(@PathVariable Long itemId, @RequestBody ItemDTO updatedItem) {
-        return ResponseEntity.ok(convertToDTO(itemService.update(itemId,convertToEntity(updatedItem))));
+        return ResponseEntity.ok(convertToDTO(itemService.update(itemId, convertToEntity(updatedItem))));
     }
 
+    @PreAuthorize("@itemAccessServiceImpl.canDelete(#itemId)")
     @DeleteMapping("/{itemId}")
     public ResponseEntity<Void> deleteItem(@PathVariable Long itemId) {
         boolean deleted = itemService.delete(itemId);

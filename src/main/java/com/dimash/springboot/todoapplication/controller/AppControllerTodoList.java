@@ -1,6 +1,7 @@
 package com.dimash.springboot.todoapplication.controller;
 
 import com.dimash.springboot.todoapplication.dto.TodoListDTO;
+import com.dimash.springboot.todoapplication.model.Person;
 import com.dimash.springboot.todoapplication.model.TodoList;
 import com.dimash.springboot.todoapplication.service.serviceImpl.TodoListServiceImpl;
 import jakarta.validation.Valid;
@@ -8,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -25,34 +27,33 @@ public class AppControllerTodoList {
         this.modelMapper = modelMapper;
     }
 
-    @PreAuthorize("@todoListAccessServiceImpl.canRead()")
     @GetMapping("/date")
-    public ResponseEntity<List<TodoListDTO>> getList(@RequestParam(value = "person_id") Long personId,
-                                                     @Valid @RequestParam(value = "creation_date", required = false)
+    public ResponseEntity<List<TodoListDTO>> getList(@Valid @RequestParam(value = "creation_date", required = false)
                                                      LocalDateTime date) {
+        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (date != null) {
-            return ResponseEntity.ok(todoListService.get(personId,date).stream()
+            return ResponseEntity.ok(todoListService.get(person.getId(), date).stream()
                     .map(this::convertToDTO).toList());
 
         }
-        return ResponseEntity.ok(todoListService.get(personId).stream().map(this::convertToDTO).toList());
+        return ResponseEntity.ok(todoListService.get(person.getId()).stream().map(this::convertToDTO).toList());
     }
 
-    @PreAuthorize("@todoListAccessServiceImpl.canRead()")
     @GetMapping("/name")
-    public ResponseEntity<List<TodoListDTO>> getList(@RequestParam(value = "person_id") Long personId,
-                                                     @RequestParam(value = "name") String name) {
-        return ResponseEntity.ok(todoListService.get(personId, name).stream().map(this::convertToDTO).toList());
+    public ResponseEntity<List<TodoListDTO>> getList(@RequestParam(value = "name") String name) {
+        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ResponseEntity.ok(todoListService.get(person.getId(), name).stream().map(this::convertToDTO).toList());
     }
 
     @PostMapping
-    public ResponseEntity<TodoListDTO> createList(@RequestParam(value = "person_id") Long id,
-                                                  @RequestBody TodoListDTO todoListDTO) {
-        TodoListDTO newTodoListDTO = convertToDTO(todoListService.create(id, convertToEntity(todoListDTO)));
+    public ResponseEntity<TodoListDTO> createList(@RequestBody TodoListDTO todoListDTO) {
+        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TodoListDTO newTodoListDTO = convertToDTO(todoListService.create(person.getId(), convertToEntity(todoListDTO)));
         return ResponseEntity.status(HttpStatus.CREATED).body(newTodoListDTO);
     }
 
     // send URL in id, and in body request?
+    @PreAuthorize("@todoListAccessServiceImpl.canUpdate(#todoListId)")
     @PutMapping("/{todoListId}")
     public ResponseEntity<TodoListDTO> updateList(@PathVariable Long todoListId,
                                                   @RequestBody TodoList updatedTodoList) {
@@ -60,6 +61,7 @@ public class AppControllerTodoList {
         return ResponseEntity.ok(convertToDTO(todoList));
     }
 
+    @PreAuthorize("@todoListAccessServiceImpl.canDelete(#todoListId)")
     @DeleteMapping("/{todoListId}")
     public ResponseEntity<Void> deleteList(@PathVariable Long todoListId) {
         try {

@@ -67,4 +67,9 @@ public class ItemServiceImpl implements ItemService {
             return false;
         }
     }
+
+    @Override
+    public Item getItem(Long itemId) {
+        return itemsRepository.getItemById(itemId);
+    }
 }

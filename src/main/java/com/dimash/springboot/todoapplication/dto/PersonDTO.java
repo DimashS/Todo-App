@@ -4,15 +4,9 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class PersonDTO {
     @NotEmpty(message = "Name can't be empty")
     @NotBlank(message = "Name can't be empty")
@@ -21,6 +15,5 @@ public class PersonDTO {
     @Min(value = 1900, message = "Excuse me, age should be greater than 8")
     private int yearOfBirth;
     private String password;
-    private String role;
 
 }
