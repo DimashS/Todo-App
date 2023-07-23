@@ -62,5 +62,8 @@ public class TodoListServiceImpl implements TodoListService {
         todoListRepository.deleteById(todoList.getId());
     }
 
-
+    @Override
+    public TodoList getList(Long todoListId) {
+        return todoListRepository.findById(todoListId).orElseThrow(() -> new RuntimeException("Something wrong"));
+    }
 }

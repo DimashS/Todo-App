@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ public class AppControllerTodoList {
         this.modelMapper = modelMapper;
     }
 
+    @PreAuthorize("@todoListAccessServiceImpl.canRead()")
     @GetMapping("/date")
     public ResponseEntity<List<TodoListDTO>> getList(@RequestParam(value = "person_id") Long personId,
                                                      @Valid @RequestParam(value = "creation_date", required = false)
@@ -36,6 +38,7 @@ public class AppControllerTodoList {
         return ResponseEntity.ok(todoListService.get(personId).stream().map(this::convertToDTO).toList());
     }
 
+    @PreAuthorize("@todoListAccessServiceImpl.canRead()")
     @GetMapping("/name")
     public ResponseEntity<List<TodoListDTO>> getList(@RequestParam(value = "person_id") Long personId,
                                                      @RequestParam(value = "name") String name) {

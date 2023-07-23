@@ -6,6 +6,7 @@ import com.dimash.springboot.todoapplication.service.serviceImpl.ItemServiceImpl
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/item")
+@PreAuthorize("isAuthenticated()")
 public class AppControllerForItems {
 
     private final ItemServiceImpl itemService;
@@ -29,7 +31,7 @@ public class AppControllerForItems {
     public ResponseEntity<List<ItemDTO>> getItem(@RequestParam(value = "todoListId") Long todoListId,
                                                  @RequestParam(value = "required_date", required = false)
                                                  LocalDate requiredDate) {
-        // if we have required = false, would have we get troubles with services methods
+        // if we have required = false, could we have troubles with services methods
         return ResponseEntity.ok(itemService.get(todoListId, requiredDate).stream()
                 .map(this::convertToDTO).toList());
     }
@@ -37,7 +39,7 @@ public class AppControllerForItems {
     @GetMapping("/description")
     public ResponseEntity<List<ItemDTO>> getItem(@RequestParam(value = "todoListId") Long todoListId,
                                                  @RequestParam(value = "description") String description) {
-        return ResponseEntity.ok(itemService.get(todoListId, description).stream()
+         return ResponseEntity.ok(itemService.get(todoListId, description).stream()
                 .map(this::convertToDTO).toList());
     }
 

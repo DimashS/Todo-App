@@ -3,7 +3,7 @@ package com.dimash.springboot.todoapplication.controller;
 import com.dimash.springboot.todoapplication.dto.AuthenticationDTO;
 import com.dimash.springboot.todoapplication.dto.PersonDTO;
 import com.dimash.springboot.todoapplication.model.Person;
-import com.dimash.springboot.todoapplication.service.RegistrationService;
+import com.dimash.springboot.todoapplication.service.serviceImpl.RegistrationServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private final RegistrationService registrationService;
+    private final RegistrationServiceImpl registrationService;
 
     private final AuthenticationManager authenticationManager;
     private final ModelMapper modelMapper;
 
-    public AuthController(RegistrationService registrationService, AuthenticationManager authenticationManager,
+    public AuthController(RegistrationServiceImpl registrationService, AuthenticationManager authenticationManager,
                           ModelMapper modelMapper) {
         this.registrationService = registrationService;
         this.authenticationManager = authenticationManager;

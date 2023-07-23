@@ -10,6 +10,7 @@ public interface TodoListService {
     List<TodoList> get(Long personId, String name);
     List<TodoList> get(Long personId);
     List<TodoList> get(Long todoListId, LocalDateTime localDate);
+    TodoList getList(Long todoListId);
     TodoList update(Long todoListId, TodoList updatedTodoList);
     void delete(Long id);
 }
