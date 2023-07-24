@@ -27,11 +27,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/auth/registration").permitAll();
+                    authorize.requestMatchers("/auth/registration","/auth/login").permitAll();
                     authorize.requestMatchers("/api/**").authenticated();
                 }).formLogin((httpSecurityFormLoginConfigurer ->
                         httpSecurityFormLoginConfigurer.loginPage("/auth/login").permitAll()
-                                .successForwardUrl("/hello")))
+                                .defaultSuccessUrl("/hello")))
                 .logout(httpSecurityLogoutConfigurer ->
                         httpSecurityLogoutConfigurer.logoutUrl("/").permitAll()).build();
     }
