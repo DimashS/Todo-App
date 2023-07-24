@@ -1,5 +1,6 @@
 package com.dimash.springboot.todoapplication.service.serviceImpl;
 
+import com.dimash.springboot.todoapplication.dto.PersonDTO;
 import com.dimash.springboot.todoapplication.model.Person;
 import com.dimash.springboot.todoapplication.repository.PersonRepository;
 import com.dimash.springboot.todoapplication.service.RegistrationService;
@@ -7,7 +8,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -22,16 +22,22 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     @Transactional
-    public void registerUser(Person person) {
-        if (personRepository.findByUsername(person.getUsername()).isPresent()) {
+    public Person registerUser(PersonDTO personDTO) {
+        if (personDTO.getName() == null || personDTO.getName().isEmpty()) {
+            throw new IllegalArgumentException("Username can't be empty");
+        }
+        if (personRepository.findByUsername(personDTO.getName()).isPresent()) {
             throw new RuntimeException("User already exists");
         }
-        person.setPassword(passwordEncoder.encode(person.getPassword()));
+        Person person = new Person();
+        person.setUsername(personDTO.getName());
+        person.setPassword(passwordEncoder.encode(personDTO.getPassword()));
         person.setRole("ROLE_USER");
-        person.setYearOfBirth(person.getYearOfBirth());
-        person.setUsername(person.getUsername());
+        person.setYearOfBirth(personDTO.getYearOfBirth());
         person.setCreatedDate(LocalDateTime.now());
         person.setLastModifiedDate(LocalDateTime.now());
+
         personRepository.save(person);
+        return person;
     }
 }
