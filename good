@@ -1,0 +1,89 @@
+[33mcommit 6a19495bcd59ace8918b4e2039e3d84e335d2a97[m[33m ([m[1;36mHEAD -> [m[1;32mSpringSecurity/registration-and-authentication[m[33m, [m[1;31morigin/SpringSecurity/registration-and-authentication[m[33m)[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Fri Jul 21 09:20:45 2023 +0300
+
+    what is next?
+
+[33mcommit 39dbdb32b114cc8f956aae99dcea184ab157cf08[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Thu Jul 20 16:19:14 2023 +0300
+
+    finished authController, begining of changing other Lists
+
+[33mcommit cbc32fc2d0d09059f72b1f333b922abc6f250151[m[33m ([m[1;32mfinal/without/registration-and-authentication[m[33m)[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Thu Jul 20 10:25:13 2023 +0300
+
+    Service and ServiceImpl added
+
+[33mcommit 91731c2c9dd7386777a69dd998a6da4b25f97c51[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Thu Jul 20 10:23:40 2023 +0300
+
+    Realization of Services and their implementation
+
+[33mcommit 727b096ae9cdd1a0aa5bbde691f6681077e278be[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Wed Jul 19 11:47:43 2023 +0300
+
+    this is master
+
+[33mcommit f9e51d2b5f684e6061d7afd6ee38cd5a96c00229[m[33m ([m[1;31morigin/final/without/registration-and-authentication[m[33m)[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Wed Jul 19 11:37:04 2023 +0300
+
+    final version without registration and authentication
+
+[33mcommit efb694b9827e4b8704ef2d41991e68e7d978412b[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Wed Jul 19 10:20:13 2023 +0300
+
+    DTO version
+
+[33mcommit 8770b968e2c2606d6e35b1b718efd76e6a0e92cf[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Wed Jul 19 09:43:42 2023 +0300
+
+    second DTO version
+
+[33mcommit 3a7a0016d1eb307ac1534adccf2c1ae9da0772d7[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Wed Jul 19 09:35:29 2023 +0300
+
+    add DTO function
+
+[33mcommit 523fe8b037f401d5d364f2f03630c3be5da834be[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Fri Jul 14 21:42:12 2023 +0300
+
+    final version of first stage
+
+[33mcommit 0a7625c163e02ef672413f9b5ba7dbf36553d9c1[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Fri Jul 14 14:08:47 2023 +0300
+
+    final version
+
+[33mcommit f9d4903b320c71bcfd755dedfcbf75c50be0b9b9[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Fri Jul 14 10:00:49 2023 +0300
+
+    after refactoring
+
+[33mcommit 4aed4bb80477b8c07996a30b9c4ab760b4669425[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Thu Jul 13 15:55:57 2023 +0300
+
+    first test
+
+[33mcommit 69ce139baba730157a883283e684d2b0708deecb[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Tue Jul 11 13:15:29 2023 +0300
+
+    final version of Services classes
+
+[33mcommit 5f2fdab35da5e16b8f8623684ab840257ad9d78c[m
+Author: DimashS <dimkakrutyshov@gmail.com>
+Date:   Mon Jul 10 11:42:09 2023 +0300
+
+    without registration
