@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/hello")
-public class SuccessfulAuthController {
+@RequestMapping("/api/v1")
+public class HelloController {
     @GetMapping
-    public HelloResponse hello() {
+    public HelloResponse getHelloPage() {
         return new HelloResponse("Welcome to your own Todo List!");
     }
 }
