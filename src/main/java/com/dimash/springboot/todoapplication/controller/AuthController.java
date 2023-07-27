@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody AuthenticationDTO authenticationDTO) {
-        return authService.authUser(authenticationDTO.getName(), authenticationDTO.getPassword());
+    public ResponseEntity<?> login(@RequestBody AuthenticationDTO authenticationDTO) {
+        return ResponseEntity.ok().body(authService.authUser(authenticationDTO));
     }
 }

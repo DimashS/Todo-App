@@ -3,12 +3,13 @@ spring:
     url: jdbc:mysql://localhost:3306/todolist_app_db
     username: root
     password: bestuser
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
   jooq:
-    sql-dialect: org.hibernate.dialect.MySQL8Dialect
+    sql-dialect: org.hibernate.dialect.MySQLDialect
   cassandra:
     port: 8080
 springdoc:
@@ -19,3 +20,12 @@ springdoc:
 server:
   error:
     include-message: always
+jwt_access_secret: "TXlzdGVyeSBXb3Jk"
+# Mystery Word
+jwt_refresh_secret: "T3RoZXIgTXlzdGVyeSBXb3Jk"
+# Other Mystery Word
+jwt_access_expiration_time: 1800000
+# in ms 30 minutes = 1.800.000 ms
+jwt_refresh_expiration_time: 864000000
+# in ms 10 days = 864.000.000
+
