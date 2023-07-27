@@ -18,20 +18,16 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "person")
 public class Person extends BaseEntity {
-
     @NotEmpty
     @NotBlank
     @Column(name = "name", unique = true)
     private String username;
-
     private int yearOfBirth;
-
     @NotEmpty
     @NotBlank
     private String password;
-
     private String role;
-
+    private String refreshToken;
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<TodoList> todoLists = new ArrayList<>();
 

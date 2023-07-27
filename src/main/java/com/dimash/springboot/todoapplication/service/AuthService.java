@@ -1,7 +1,8 @@
 package com.dimash.springboot.todoapplication.service;
 
-import com.dimash.springboot.todoapplication.response.LoginResponse;
+import com.dimash.springboot.todoapplication.dto.AuthenticationDTO;
+import org.springframework.http.ResponseEntity;
 
 public interface AuthService {
-    public LoginResponse authUser(String name, String password);
+    public ResponseEntity<?> authUser(AuthenticationDTO authenticationDTO);
 }

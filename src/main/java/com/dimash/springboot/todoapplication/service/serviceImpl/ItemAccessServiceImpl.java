@@ -4,7 +4,6 @@ import com.dimash.springboot.todoapplication.model.Item;
 import com.dimash.springboot.todoapplication.model.Person;
 import com.dimash.springboot.todoapplication.model.TodoList;
 import com.dimash.springboot.todoapplication.service.ItemAccessService;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
