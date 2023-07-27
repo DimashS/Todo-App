@@ -16,7 +16,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "person")
 public class Person extends BaseEntity {
 
     @NotEmpty

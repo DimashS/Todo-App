@@ -5,7 +5,6 @@ import com.dimash.springboot.todoapplication.response.LoginResponse;
 import com.dimash.springboot.todoapplication.service.AuthService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public LoginResponse authUser(String name, String password) {
         try {
-            Authentication authentication = authenticationManager.authenticate
+            authenticationManager.authenticate
                     (new UsernamePasswordAuthenticationToken(name, password));
             return new LoginResponse(personRepository.findByUsername(name).get());
         } catch (AuthenticationException e) {

@@ -10,8 +10,6 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class ItemDTO {
     private String description;
     private boolean completed;

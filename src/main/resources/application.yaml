@@ -19,5 +19,5 @@ springdoc:
 server:
   error:
     include-message: always
-
-jwt.access.secret =
+jwt_access_secret: SSBoYXZlIG5vIGVuZW1pZXMK
+jwt_refresh_secret: VGhlcmUgaXMgbm8gb25lIGluIHRoaXMgd29ybGQgeW91IG5lZWQgdG8gaHVydAo=
