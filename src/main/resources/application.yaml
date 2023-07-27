@@ -19,3 +19,5 @@ springdoc:
 server:
   error:
     include-message: always
+
+jwt.access.secret =
