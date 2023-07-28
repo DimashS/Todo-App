@@ -1,12 +1,10 @@
 package com.dimash.springboot.todoapplication.utils;
 
 import com.dimash.springboot.todoapplication.security.PersonDetails;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +17,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Component
+@Slf4j
 public class JWTUtil {
     @Value("${jwt_access_secret}")
     private String accessKey;
@@ -60,26 +59,39 @@ public class JWTUtil {
         return validateToken(accessToken, accessKey);
     }
 
-    public boolean validateAccessToken(@NonNull String refreshToken) {
+    public boolean validateRefreshToken(@NonNull String refreshToken) {
         return validateToken(refreshToken, refreshKey);
     }
 
-    private boolean validateToken(@NonNull String token, @NonNull Key key) {
+    private boolean validateToken(@NonNull String token, @NonNull String secret) {
         try {
             Jwts.parserBuilder()
-                    .setSigningKey(key)
+                    .setSigningKey(getSigningKey(secret))
                     .build()
                     .parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException expEx) {
-            expEx.getCause();
+            log.error("Token expired", expEx);
         } catch (UnsupportedJwtException unsEx) {
+            log.error("Unsupported jwt", unsEx);
         } catch (MalformedJwtException mjEx) {
-        } catch (SignatureException sEx) {
+            log.error("Some troubles with jwt", mjEx);
         } catch (Exception e) {
+            log.error("invalid token", e);
         }
         return false;
     }
 
+    public Claims getAccessClaims(@NonNull String token) {
+        return getClaims(token, accessKey);
+    }
+
+    public Claims getClaims(@NonNull String token, @NonNull String secret) {
+        return Jwts.parserBuilder().setSigningKey(getSigningKey(secret)).build().parseClaimsJws(token).getBody();
+    }
+
+    public Claims getRefreshClaims(@NonNull String token) {
+        return getClaims(token, refreshKey);
+    }
 
 }

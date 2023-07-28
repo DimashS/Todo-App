@@ -5,5 +5,7 @@ import lombok.Data;
 
 @Data
 public class LoginResponse {
-    private final Person person;
+    private final String successString;
+    private final String accessToken;
+    private final String refreshToken;
 }

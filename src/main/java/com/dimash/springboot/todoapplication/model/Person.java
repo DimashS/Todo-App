@@ -32,7 +32,7 @@ public class Person extends BaseEntity {
     private String role;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<TodoList> todoLists = new ArrayList<>();
+    private List<TodoList> todoLists;
 
 
 }

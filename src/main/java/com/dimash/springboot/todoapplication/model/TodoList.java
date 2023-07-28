@@ -24,5 +24,5 @@ public class TodoList extends BaseEntity {
 
     @OneToMany(mappedBy = "todoList", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Item> itemList = new ArrayList<>();
+    private List<Item> itemList;
 }
