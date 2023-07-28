@@ -39,7 +39,7 @@ public class JWTUtil {
 
     public String generateRefreshToken(@NonNull PersonDetails personDetails) {
         LocalDateTime now = LocalDateTime.now();
-        Instant refreshExpirationInstant = now.plusDays(30).atZone(ZoneId.systemDefault()).toInstant());
+        Instant refreshExpirationInstant = now.plusDays(30).atZone(ZoneId.systemDefault()).toInstant();
         Date refreshExpiration = Date.from(refreshExpirationInstant);
         return Jwts.builder()
                 .setSubject(personDetails.getUsername())

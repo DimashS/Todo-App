@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+    private JwtFilter jwtFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -38,8 +39,15 @@ public class SecurityConfig {
         httpSecurity.cors((AbstractHttpConfigurer::disable));
         httpSecurity.httpBasic(AbstractHttpConfigurer::disable);
         httpSecurity.authorizeHttpRequests(authorize ->
-                authorize.requestMatchers("/auth/**", "/swagger-ui/**").permitAll()
+                authorize
+                        .requestMatchers("/auth/registration",
+                                "/auth/login",
+                                "/auth/token",
+                                "/swagger-ui/**")
+                        .permitAll()
                         .anyRequest().authenticated()
+                        .and()
+                        .addFilterAfter(jwtFilter, JwtFilter.class)
         );
         httpSecurity.formLogin(httpSecurityFormLoginConfigurer ->
                 httpSecurityFormLoginConfigurer.loginPage("/auth/login")

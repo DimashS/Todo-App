@@ -34,5 +34,7 @@ public class Person extends BaseEntity {
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<TodoList> todoLists;
 
+    private String refreshToken;
+
 
 }

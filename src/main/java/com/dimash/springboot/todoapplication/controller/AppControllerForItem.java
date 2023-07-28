@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/api/item")
 @PreAuthorize("isAuthenticated()")
 public class AppControllerForItem {
 
