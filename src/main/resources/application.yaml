@@ -11,6 +11,8 @@ spring:
     sql-dialect: org.hibernate.dialect.MySQL8Dialect
   cassandra:
     port: 8080
+  profiles:
+    default:
 springdoc:
   api-docs:
     path: /api-docs
@@ -19,3 +21,9 @@ springdoc:
 server:
   error:
     include-message: always
+
+jwt_access_secret: SSBoYXZlIG5vIGVuZW1pZXMK
+jwt_refresh_secret: VGhlcmUgaXMgbm8gb25lIGluIHRoaXMgd29ybGQgeW91IG5lZWQgdG8gaHVydAo=
+logging:
+  level:
+    root: error

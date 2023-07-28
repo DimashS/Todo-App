@@ -34,7 +34,6 @@ public class AppControllerTodoList {
         if (date != null) {
             return ResponseEntity.ok(todoListService.get(person.getId(), date).stream()
                     .map(this::convertToDTO).toList());
-
         }
         return ResponseEntity.ok(todoListService.get(person.getId()).stream().map(this::convertToDTO).toList());
     }

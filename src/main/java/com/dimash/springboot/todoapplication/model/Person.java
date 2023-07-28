@@ -16,7 +16,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "person")
 public class Person extends BaseEntity {
 
     @NotEmpty
@@ -33,7 +32,9 @@ public class Person extends BaseEntity {
     private String role;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<TodoList> todoLists = new ArrayList<>();
+    private List<TodoList> todoLists;
+
+    private String refreshToken;
 
 
 }

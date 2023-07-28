@@ -22,7 +22,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     @Transactional
-    public Person registerUser(PersonDTO personDTO) {
+    public void registerUser(PersonDTO personDTO) {
         if (personDTO.getName() == null || personDTO.getName().isEmpty()) {
             throw new IllegalArgumentException("Username can't be empty");
         }
@@ -38,6 +38,5 @@ public class RegistrationServiceImpl implements RegistrationService {
         person.setLastModifiedDate(LocalDateTime.now());
 
         personRepository.save(person);
-        return person;
     }
 }
